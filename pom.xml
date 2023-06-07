@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Q-Leraning</artifactId>
+    <artifactId>Q-Learning-implementation</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

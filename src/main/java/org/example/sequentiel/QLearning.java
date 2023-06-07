@@ -2,16 +2,16 @@ package org.example.sequentiel;
 
 import java.util.Arrays;
 import java.util.Random;
+import org.example.QLUtils;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
+import static org.example.QLUtils.*;
+
+import org.example.QLUtils;
 
 public class QLearning {
-    private final double ALPHA=0.1;
-    private final double GAMMA=0.9;
-    private final double EPSILON=0.3;
-    private final double MAX_EPOCHS=2000;
-    private final int GRID_SIZE=6;
-    private final int ACTIONS_SIZE=4;
+
+
     private int[][] grid;
     private double[][] qTable = new double[GRID_SIZE*GRID_SIZE][ACTIONS_SIZE];
     private int[][] actions;
@@ -98,10 +98,12 @@ public class QLearning {
         //System.out.println("Final State: ("+stateI+" "+stateJ+")");
     }
     public void runQLearning(){
+        //IN MAS : This is a One Shot BEhavior
         int iteration=0;
         int currentState;
         int newState;
         resetState();
+        //This is a Cycling Behavior
         while (iteration<MAX_EPOCHS){
             resetState();
             while (!finished()){
