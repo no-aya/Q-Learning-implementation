@@ -1,7 +1,9 @@
 # Q-Learning
 
 Apprentissage par renforcement (reinforcement learning) avec Q-Learning.
-
+## Sommaire
+### 1. [Implémentation Sequentielle](./src/main/java/org/example/sequentiel)
+### 2. [Implémentation Multi-Agents](./src/main/java/org/example/mas)
 ## Principe 
 - *L'agent* apprend à prendre des décisions en fonction de l'état dans lequel il se trouve.
 - *Reward* : récompense ou punition (Rt)
@@ -31,7 +33,7 @@ Avec :
 - Deep Q-Learning : Q-Learning avec un réseau de neurones
 
 ## TO DO 
-- [ ] Implémenter Q-Learning MAS
+- [x] Implémenter Q-Learning MAS
 - [ ] Visualiser les résultats
 
 
