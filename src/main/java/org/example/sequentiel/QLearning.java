@@ -1,42 +1,14 @@
 package org.example.sequentiel;
-
-import java.util.Arrays;
 import java.util.Random;
-import org.example.QLUtils;
-
-import static jdk.nashorn.internal.objects.NativeMath.round;
 import static org.example.QLUtils.*;
-
-import org.example.QLUtils;
-
 public class QLearning {
 
-
-    private int[][] grid;
     private double[][] qTable = new double[GRID_SIZE*GRID_SIZE][ACTIONS_SIZE];
-    private int[][] actions;
-
     //Définir le point de départ
     private int stateI;
     private int stateJ;
 
     public QLearning(){
-       actions= new int[][]{
-               {0, 1}, //right
-               {1, 0}, // down
-               {0, -1}, //left
-               {-1, 0} //up
-       };
-       grid=new int[][]{
-               //0=rien, -1 obstacte, 1=arrivée
-               {0, 0, 0,0,0,0},
-               {0, 0, 0, 0,-1,0},
-               {0, 0, 0,0,0,0},
-               {-1, -1, -1,-1,-1,0},
-               {0, 0, 0,0,0,0},
-               {0, 0,0,0,0,1}
-
-       };
     }
 
     private void resetState(){
@@ -50,7 +22,6 @@ public class QLearning {
         if(random.nextDouble()<epsilon){
             //Exploration : Choisir une action aléatoire
             bestAction=random.nextInt(ACTIONS_SIZE);
-            int[] actionChoisie=actions[bestAction];
         }else{
             //Exploitation : Choisir l'action avec la plus grande récompense
             int state = stateI*GRID_SIZE+stateJ; //Convertir la position en un nombre unique
@@ -66,12 +37,12 @@ public class QLearning {
     }
 
     private boolean finished(){
-        return grid[stateI][stateJ]==1;
+        return GRID[stateI][stateJ]==1;
     }
     private int executeAction(int action){
         //Bounce back if action is not valid
-        stateI=Math.max(0,Math.min(stateI+actions[action][0],GRID_SIZE-1));
-        stateJ=Math.max(0,Math.min(stateJ+actions[action][1],GRID_SIZE-1));
+        stateI=Math.max(0,Math.min(stateI+ACTIONS[action][0],GRID_SIZE-1));
+        stateJ=Math.max(0,Math.min(stateJ+ACTIONS[action][1],GRID_SIZE-1));
         return stateI*GRID_SIZE+stateJ;
     }
 
@@ -84,7 +55,6 @@ public class QLearning {
            }
             System.out.println("|");
         }
-        //System.out.println(Arrays.deepToString(qTable));
         resetState();
         while (!finished()){
             int currentState=stateI*GRID_SIZE+stateJ;
@@ -98,12 +68,10 @@ public class QLearning {
         //System.out.println("Final State: ("+stateI+" "+stateJ+")");
     }
     public void runQLearning(){
-        //IN MAS : This is a One Shot BEhavior
         int iteration=0;
         int currentState;
         int newState;
         resetState();
-        //This is a Cycling Behavior
         while (iteration<MAX_EPOCHS){
             resetState();
             while (!finished()){
@@ -117,7 +85,7 @@ public class QLearning {
 
                 //Update Q-Table
                 qTable[currentState][action]=qTable[currentState][action]
-                        +ALPHA*(grid[stateI][stateJ]
+                        +ALPHA*(GRID[stateI][stateJ]
                         +GAMMA*qTable[newState][action2]
                         -qTable[currentState][action]
                 );
