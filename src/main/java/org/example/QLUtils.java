@@ -8,15 +8,20 @@ public class QLUtils {
     public static final int GRID_SIZE=6;
     public static final int ACTIONS_SIZE=4;
 
-    public static final int[][] ACTIONS={{-1,0},{1,0},{0,-1},{0,1}};
+    public static final int[][] ACTIONS={
+            {-1,0},//0 -> up
+            {1,0},//1 -> down
+            {0,-1},//2 -> left
+            {0,1}//3 -> right
+    };
     public static final int[][] GRID={
         //0=rien, -1 obstacte, 1=arrivée
-        {0, 0, 0,0,0,0},
-        {0, 0, 0, 0,-1,0},
-        {0, 0, 0,0,0,0},
-        {0, 0, -1,-1,0,0},
-        {0, 0, 0,0,0,0},
-        {0, 0,0,0,0,1}
+        {0, 0, 0, 0, 0,-1},
+        {0, 0, 0, 0,-1, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0,-1,-1, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1}
     };
 
     public static final int NUMBER_OF_AGENTS=5;
