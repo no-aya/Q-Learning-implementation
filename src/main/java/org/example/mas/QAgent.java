@@ -9,10 +9,6 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
-import org.example.QLUtils;
-
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 import static org.example.QLUtils.*;
@@ -20,6 +16,9 @@ import static org.example.QLUtils.GAMMA;
 
 public class QAgent extends Agent {
     double[][] qTable = new double[GRID_SIZE*GRID_SIZE][ACTIONS_SIZE];
+
+    //Get stateI and StateJ from properties
+
     int stateI=0;
     int stateJ=0;
 
@@ -27,6 +26,7 @@ public class QAgent extends Agent {
     public void setup(){
         System.out.println("Hello! Agent  "+getAID().getName()+" is ready.");
         SequentialBehaviour sb = new SequentialBehaviour();
+
         sb.addSubBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
@@ -39,7 +39,7 @@ public class QAgent extends Agent {
             int iteration;
             @Override
             public void action() {
-                    runQLearning();
+                runQLearning();
             }
             @Override
             public boolean done() {
@@ -58,8 +58,8 @@ public class QAgent extends Agent {
 
     }
     private void resetState(){
-        stateI=0;
-        stateJ=0;
+        stateI = (Integer) getArguments()[0];
+        stateJ = (Integer) getArguments()[1];
     }
     private int chooseAction(double epsilon){
         Random random=new Random();
